@@ -654,7 +654,8 @@ export default {
     theme: '主题',
     customize: '自定义',
     redirect: '完成时重定向',
-    buttonLinkUrl: '按钮链接地址'
+    buttonLinkUrl: '按钮链接地址',
+    hiddenFields: '隐藏字段'
   },
   languages: {
     en: 'English',
