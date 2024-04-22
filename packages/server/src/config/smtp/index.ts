@@ -16,5 +16,5 @@ export const SmtpOptionsFactory = (): SmtpOptions => ({
   secure: SMTP_SECURE,
   ignoreCert: SMTP_IGNORE_CERT,
   pool: true,
-  logger: true
+  logger: false
 })
