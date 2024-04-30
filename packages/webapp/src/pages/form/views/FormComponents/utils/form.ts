@@ -11,9 +11,9 @@ import { IMapType } from '@/components/ui/typing'
 
 import type { IFormField, IPartialFormField } from '../typings'
 
-const MENTION_REGEX = /<span[^>]+data-mention="([^"]+)"[^>]+>[^<]+<\/span>/gi
-const HIDDEN_FIELD_REGEX = /<span[^>]+data-hiddenfield="([^"]+)"[^>]+>[^<]+<\/span>/gi
-const VARIABLE_REGEX = /<span[^>]+data-variable="([^"]+)"[^>]+>[^<]+<\/span>/gi
+const MENTION_REGEX = /<span[^>]+data-mention="([^"]+)"([^>]+)?>[^<]+<\/span>/gi
+const HIDDEN_FIELD_REGEX = /<span[^>]+data-hiddenfield="([^"]+)"([^>]+)?>[^<]+<\/span>/gi
+const VARIABLE_REGEX = /<span[^>]+data-variable="([^"]+)"([^>]+)?>[^<]+<\/span>/gi
 
 export function isNotNil(arg: any): boolean {
   return !helper.isNil(arg)
@@ -92,7 +92,7 @@ export function replaceHTML(
 
 export function parseFields(
   fields?: IFormField[],
-  translations: FormFieldTranslation = {}
+  translations: Record<string, any> = {}
 ): IFormField[] {
   const result = fields?.filter(f => FORM_FIELD_KINDS.includes(f.kind))
 
