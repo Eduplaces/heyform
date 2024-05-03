@@ -3,7 +3,7 @@ FROM node:18.20.0-alpine3.19 as base
 ARG APP_PATH=/app
 WORKDIR $APP_PATH
 
-RUN npm install -g pnpm
+RUN npm install -g pnpm@latest-8
 RUN apk add --no-cache python3 make g++
 
 COPY package.json $APP_PATH/package.json
@@ -21,7 +21,7 @@ FROM node:18.20.0-alpine3.19 as runner
 ARG APP_PATH=/app
 WORKDIR $APP_PATH
 
-RUN npm install -g pnpm
+RUN npm install -g pnpm@latest-8
 RUN apk add --no-cache python3 make g++
 
 COPY --from=base $APP_PATH/packages/server/dist ./dist
