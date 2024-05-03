@@ -1,5 +1,9 @@
 import { htmlUtils, parsePlainAnswer, validateRequiredField } from '@heyform-inc/answer-utils'
-import { FORM_FIELD_KINDS, FieldKindEnum } from '@heyform-inc/shared-types-enums'
+import {
+  FORM_FIELD_KINDS,
+  FieldKindEnum,
+  FormFieldTranslation
+} from '@heyform-inc/shared-types-enums'
 import { helper, type } from '@heyform-inc/utils'
 
 import { KeyCode } from '@/components/ui'
