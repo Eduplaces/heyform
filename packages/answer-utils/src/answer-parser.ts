@@ -35,7 +35,7 @@ function singleChoice(answer: Answer): string {
 function multipleChoice(answer: Answer): string {
   return (answer.properties?.choices?.filter(row => answer.value.value.includes(row.id)) || [])
     .map(row => row.label)
-    .concat([answer.value.other])
+    .concat([answer.value?.other])
     .filter(row => helper.isValid(row))
     .join(', ')
 }
