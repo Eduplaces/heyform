@@ -7,7 +7,7 @@ import { locales } from '@/pages/form/views/FormComponents'
 import en from './en'
 import pl from './pl'
 import zhCn from './zhCn'
-import zhTw from './zhTw'
+import zhTw from './zhTW'
 
 const resources = {
   en: {
