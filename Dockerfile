@@ -9,10 +9,13 @@ RUN apk add --no-cache python3 make g++
 COPY package.json $APP_PATH/package.json
 COPY pnpm-lock.yaml $APP_PATH/pnpm-lock.yaml
 COPY pnpm-workspace.yaml $APP_PATH/pnpm-workspace.yaml
+COPY packages/answer-utils $APP_PATH/packages/answer-utils
 COPY packages/server $APP_PATH/packages/server
 COPY packages/webapp $APP_PATH/packages/webapp
 
+RUN pnpm build:answer-utils
 RUN pnpm install
+RUN cd $APP_PATH/packages/server && pnpm link ../answer-utils
 RUN pnpm build
 RUN pnpm --filter ./packages/webapp export
 
@@ -24,6 +27,7 @@ WORKDIR $APP_PATH
 RUN npm install -g pnpm
 RUN apk add --no-cache python3 make g++
 
+COPY --from=base $APP_PATH/packages/answer-utils ./answer-utils
 COPY --from=base $APP_PATH/packages/server/dist ./dist
 COPY --from=base $APP_PATH/packages/server/mongoose ./mongoose
 COPY --from=base $APP_PATH/packages/server/resources ./resources
@@ -36,6 +40,7 @@ COPY --from=base $APP_PATH/packages/server/tsconfig.json ./tsconfig.json
 COPY --from=base $APP_PATH/packages/server/package.json ./package.json
 
 RUN pnpm install --prod
+RUN pnpm link ./answer-utils
 
 EXPOSE 8000
 CMD ["npm", "start"]
