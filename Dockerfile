@@ -13,8 +13,8 @@ COPY packages/answer-utils $APP_PATH/packages/answer-utils
 COPY packages/server $APP_PATH/packages/server
 COPY packages/webapp $APP_PATH/packages/webapp
 
-RUN pnpm build:answer-utils
 RUN pnpm install
+RUN pnpm build:answer-utils
 RUN cd $APP_PATH/packages/server && pnpm link ../answer-utils
 RUN pnpm build
 RUN pnpm --filter ./packages/webapp export
