@@ -1,9 +1,9 @@
-FROM node:18.20.0-alpine3.19 as base
+FROM node:22-alpine as base
 
 ARG APP_PATH=/app
 WORKDIR $APP_PATH
 
-RUN npm install -g pnpm
+RUN npm install -g pnpm@9.15.9
 RUN apk add --no-cache python3 make g++
 
 COPY package.json $APP_PATH/package.json
@@ -16,12 +16,12 @@ RUN pnpm install
 RUN pnpm build
 RUN pnpm --filter ./packages/webapp export
 
-FROM node:18.20.0-alpine3.19 as runner
+FROM node:22-alpine as runner
 
 ARG APP_PATH=/app
 WORKDIR $APP_PATH
 
-RUN npm install -g pnpm
+RUN npm install -g pnpm@9.15.9
 RUN apk add --no-cache python3 make g++
 
 COPY --from=base $APP_PATH/packages/server/dist ./dist
